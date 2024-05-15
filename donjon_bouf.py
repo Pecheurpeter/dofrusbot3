@@ -2,18 +2,7 @@ from pyautogui import *
 import pyautogui
 import time
 import keyboard
-
-def enter_dungeon():
-    time.sleep(2)
-    pyautogui.keyDown('shift')
-    time.sleep(.2)
-    pyautogui.click(1174,338)
-    time.sleep(.2)
-    pyautogui.keyUp('shift')
-    time.sleep(.2)
-    pyautogui.click(693, 587)
     
-
 # boufton_noir_rgb = (100, 84 70)
 # boufton_blanc = (252, 235, 196)
 
@@ -147,8 +136,6 @@ def check_spell_castable():
         return False
 
 
-        
-            
 def check_end_fight_tab():
     for _ in range (10):
         try:
