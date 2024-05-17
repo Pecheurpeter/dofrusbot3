@@ -72,28 +72,6 @@ def locate_bouftou():
         x+=1
     return bouftous_pos
 
-def locate_mandra():
-    pic = pyautogui.screenshot(region=(430,278,1100,600))
-    width, height = pic.size
-    print("looking for mandra")
-    x = 0
-    while x < width:
-        y = 0
-        while y < height:
-            r,g,b = pic.getpixel((x,y))
-            if r == 195 and g == 73 and b == 49:
-                mandra_pos = (x+430, y+278)
-                print('Mandragova located in : ', x+430, y+278)
-                return mandra_pos
-            y+=1
-        x+=1
-
-def move_forward():
-    mandra_pos = locate_mandra()
-    pyautogui.moveTo(mandra_pos[0]+150, mandra_pos[1])
-    time.sleep(.5)
-    pyautogui.click(mandra_pos[0]+150, mandra_pos[1])
-    time.sleep(1.5)
 
 def check_po():
     locate_bouftou()
@@ -105,25 +83,6 @@ def check_po():
         if mandra_x-bouftou[0] < 400 and mandra_y-bouftou[1] < (200): #valeur absolue
             print("combo is in po")
 
-def locate_perso_tour(): # a optimiser
-    try:
-        location = pyautogui.locateOnScreen('sadi-tour.png', region=(929, 748, 650, 100), confidence=.9)
-        print("it's mandragova's turn")
-        return location
-        
-    except pyautogui.ImageNotFoundException:
-        print("It's another player's turn")
-        time.sleep(.5)
-        return None
-
-def pass_tour(sec_to_wait, number_of_turn):
-    location = locate_perso_tour()
-    if location:
-        for _ in range (number_of_turn):
-            print("it's mandragova's turn")
-            pyautogui.press('f1')
-            print("tour", _+1 ,"passed")
-            time.sleep(sec_to_wait)
 
 def check_spell_castable():
     try:

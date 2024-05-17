@@ -2,26 +2,12 @@ from pyautogui import *
 import pyautogui
 import time
 import keyboard
-from donjon_bouf import locate_perso_tour
+from utils import combat
 
 tremblement_region = (1250, 950, 50, 50)
 vent_empoi_region = (1300, 950, 50, 50)
 puissance_sylv_region = (1350, 950, 50, 50)
 
-def get_ready():
-    time.sleep(1)
-    pyautogui.press('f1')
-    time.sleep(6)
-
-def is_my_turn():
-    pic = pyautogui.screenshot()
-    r,g,b = pic.getpixel((1106,901))
-    if r == 255 and g == 102 and b == 0:
-        print("it's mandragova's turn ! play !")
-        return True
-    elif r == 81 and g == 74 and b == 60:
-        print("it's another players turn")
-        return False
 
 tremblement_pos = (1274, 983)
 vent_empoi_pos = (1338, 974)
@@ -53,9 +39,8 @@ def check_spell_cast(spell_pos):
         print("can't find spell")
         return("can't find spell")
 
-
 def cast_tremblement():
-    location = locate_perso_tour()
+    location = combat.locate_perso_tour()
     keyboard.press_and_release('&')
     time.sleep(.5)
     pyautogui.click(location)
@@ -67,12 +52,12 @@ def cast_vent_empoi():
     cast_tremblement()
     keyboard.press_and_release('é')
     time.sleep(.5)
-    pyautogui.click(locate_perso_tour())
+    pyautogui.click(combat.locate_perso_tour())
     print("vent empoisonné lancé")
     time.sleep(.5)
     keyboard.press_and_release('"')
     time.sleep(.5)
-    pyautogui.click(locate_perso_tour())
+    pyautogui.click(combat.locate_perso_tour())
     print("puissance sylv lancé")
 
 def cast_combo_fourbe():
